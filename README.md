@@ -378,7 +378,7 @@
 
 选中Manually select features后，再选择功能：
 
-![image-20210220221329335](.\img\manually.png)
+![image-20210220221329335](/img/manually.png)
 
 history mode，页面路由含不含有#;选择Y
 
