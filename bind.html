@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>V-bind class-style</title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<p class="first" :class="{'active':isActive,'error':isError}" :style="{'color':color}">看看我现在是什么颜色:&nbsp;&nbsp;&nbsp;{{color}}</p>
+			<button type="button" @click="changeColor()">点击我尝试</button>
+		</div>
+		<script type="text/javascript">
+			var app=new Vue({
+				el:'#app',
+				data:{
+					isActive:true,
+					isError:false,
+					color:''
+				},
+				methods:{
+					changeColor:function(){
+						this.color='red';
+						this.isError=true;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

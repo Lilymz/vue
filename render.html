@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="outerContent"/>
+			<button type="button" @click="num++">+</button>
+			<button type="button" @click="num--">-</button>
+			{{num}}
+			<archor :advanced="num" title="锚点">{{outerContent}}</archor> <!-- 模板父组件 -->
+		</div>
+		<script type="text/javascript">
+			var app=new Vue({
+				el:'#app',
+				data:{
+					num:1,
+					outerContent:"特点"
+				},
+				components:{
+					archor:{
+						render:function(createElement){
+							return createElement(
+							'h'+this.level,
+							[createElement(
+								'a',
+								{
+									attrs:{
+										href:'#'+this.content
+									}
+								},
+								this.$slots.default
+							)]
+							);
+						},
+						props:{
+							advanced:{
+								type:Number,
+								require:true
+							},
+							title:String
+						},
+						data(){
+							return {
+								level:this.advanced,
+								content:this.title
+							}
+						},
+						watch:{
+							advanced:function(val){
+								console.log(this.level);
+								this.level=val;
+								console.log(val);
+								console.log(this.level)
+							},
+							title:function(val){
+								this.content=val;
+							}
+						}
+					}
+				}
+				})
+		</script>
+	</body>
+</html>

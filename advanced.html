@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 组件高级用法</title>
+		<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<recursion-component :count="1"></recursion-component>
+		</div>
+		<script type="text/javascript">
+			var app=new Vue({
+				el:'#app',
+				components:{
+					recursionComponent:{
+						name:'recursion-component',
+						props:{
+							count:{
+								type:Number,
+								default:1
+							}
+						},
+						template:'\
+						<div class="child">\
+						<recursion-component :count="count+1" v-if="count<3"></recursion-component>\
+						</div>\
+						'
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

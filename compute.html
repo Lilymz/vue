@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 计算</title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+	<script type="text/javascript">
+		function hello(msg){
+			return '你好,'+msg;
+		}
+	</script>
+	<input id="ipt" value="sfasf" />
+	<div id="app">
+		<p>{{number/3}}</p>
+		<p>{{isOK?'确定':'取消'}}</p>
+		<p>{{text.split(',').reverse()[0]+text.split(',').reverse()[1]}}</p>
+		<p>{{document.getElementById('ipt').val}}</p>
+		<p v-pre>{{我不需要进行编译}}</p>
+	</div>
+	<script type="text/javascript">
+		var app=new Vue({
+			el:'#app',
+			data:{
+				number:8,
+				isOK:true,
+				text:'123,456'
+			}
+		});
+	</script>
+	</body>
+</html>

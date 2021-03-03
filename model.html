@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<select name="mobile" id="mobile" v-model="selected">
+				<option>请选择</option>
+				<option>iPhone4</option>
+				<option>iPhone5</option>
+				<option>MI 9</option>
+				<option value="Ipad pro">Ipad mini</option>
+			</select>
+			<p>你好</p>
+			<p>当前的手机类型:&nbsp;&nbsp;&nbsp;{{selected}}</p>
+		</div>
+		<script type="text/javascript">
+			var app=new Vue({
+				el:'#app',
+				data:{
+					selected:'手机类型'
+				}
+			})
+		</script>
+	</body>
+</html>

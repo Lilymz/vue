@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue内置指令</title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+	<div id="app">
+		<!-- v-show -->
+		<p v-show="isShow">我是v-show指令操作的Dom</p>
+		<!-- v-cloak -->
+		<p v-cloak>我是v-show指令操作的Dom{{msg}}</p>
+		<!-- v-once -->
+		<p v-once>我是v-once指令操作的Dom {{once}}</p>
+		<p v-once>子{{once}}</p> 
+	</div>
+	<script type="text/javascript">
+		var app=new Vue({
+			el:"#app",
+			data:{
+				isShow:false,
+				msg:'hello,v-cloak',
+				once:'张杰'
+			}
+		})
+		app.msg='以改变'
+	</script>
+	<style type="text/css">
+		[v-cloak]{
+			display: none;
+		}
+	</style>
+	</body>
+</html>

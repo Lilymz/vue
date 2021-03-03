@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数字输入框组件</title>
+		<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{initialValue}}
+			<number-input :initial="initialValue" :max="100" :min="-100"></input-number>
+		</div>
+		<script type="text/javascript">
+			function isInputNumber(value){
+				return (/(^-?[0-9]+\.{1}\d+$)|(^-?[1-9][0-9]*$)|(^-?0{1}$)/).test(value+'');
+			}
+			var app=new Vue({
+				el:'#app',
+				data:{
+					initialValue:10,
+				},
+				components:{
+					'number-input':{
+						props:{
+							initial:{
+								type:Number,
+								require:true,
+								default:0
+							},
+							max:{
+								type:Number,
+								require:true
+							},
+							min:{
+								type:Number,
+								require:true
+							}
+						},
+						data:function(){
+							return {
+								currentValue:this.initial
+							}
+						},
+						watch:{
+							currentValue:function(val){
+								this.$emit('input',val);
+								this.$emit('on-change',val);
+							}
+						},
+						template:'\
+						<div class="main">\
+						<input id="ipt" type="text" :value="currentValue" @sss="handlerChange"/>\
+						<button type="button" @click="handlerUp" :disabled="currentValue>=max">+</button>\
+						<button type="button" @click="handlerDown" :disabled="currentValue<=min">-</button>\
+						</div>\
+						',
+						methods:{
+							handlerUp(){
+								if(this.currentValue>=this.max) return;
+								return this.currentValue+=1;
+							},
+							handlerDown(){
+								if(this.currentValue<=this.min) return;
+								return this.currentValue-=1;
+							},
+							updateValue(val){
+								if(val>=this.max) val=this.max;
+								if(val<=this.min) val=this.min;
+								this.currentValue=val;
+							},
+							handlerChange(event){
+								var val=event.target.value.trim();
+								var max=this.max;
+								var min=this.min;
+								if(isInputNumber(val)){
+									var value=Number(val);
+									this.currentValue=value;
+									if(value>=max){
+										this.currentValue=max;
+									}else if(value<=min){
+										this.currentValue=min;
+									}
+								}else{
+									event.target.value=this.currentValue;
+								}
+							}
+						},
+						mounted:function(){
+							this.updateValue(this.initial);
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>vue 生命周期</title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app"></div>
+		<script type="text/javascript">
+			var app=new Vue({
+				el:'#app',
+				data:{
+					a:0
+				},
+				created: () => {
+					var _this=this;
+					_this.a=100;
+					console.log("vue实例初始化创建的值为"+_this.a);
+				},
+				mounted: () => {
+					this.a=this.a*10;
+					console.log(this.a);
+				},
+				beforeDestroy: () => {
+					this.a=0;
+					console.log(this.a);
+				}
+			})
+		</script>
+	</body>
+</html>

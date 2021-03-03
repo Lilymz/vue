@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+	<div id="app">
+		<input type="text" v-model="msg" />
+		<props-component :father-message="msg">
+		</props-component>
+		<props-child-component :child-message="msg">
+		</props-child-component>
+	</div>
+	<script type="text/javascript">
+		var app=new Vue({
+			el:'#app',
+			data:{
+				msg:null
+			},
+			components:{
+				'props-component':{
+					props:['fatherMessage'], 
+					template:'<div>{{fatherMessage}}</div>'
+				},
+				'props-child-component':{
+					props:['childMessage'], 
+					template:'<div>{{childMessage}}</div>'
+				}
+			}
+		})
+	</script>
+	</body> 
+</html>

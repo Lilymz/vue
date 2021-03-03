@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app">
+			<ul>
+				<li v-for="book in books">{{book}}</li>
+			</ul>
+			<button type="button" @click="bookPush">bookPush</button>
+			<button type="button" @click="bookPop">bookPop</button>
+			<button type="button" @click="bookSort">bookSort</button>
+			<button type="button" @click="bookShift">bookShift</button>
+			<button type="button" @click="bookUnShift">bookUnShift</button>
+			<button type="button" @click="bookReverse">bookReverse</button>
+		</div>
+	<script type="text/javascript">
+		var app=new Vue({
+			el:'#app',
+			data:{
+				books:['java并发编程实战','redis实战','mongoDB入门','thymeleaf使用手册'],
+				EleShift:null,
+				ElePop:null
+			},
+			methods:{
+				bookPush:function(){
+					this.books.push(this.ElePop);
+				},
+				bookPop:function(){
+					this.ElePop=this.books.pop();
+				},
+				bookSort:function(){
+					this.books.sort();
+				},
+				bookShift:function(){
+					this.EleShift=this.books.shift();
+				},
+				bookUnShift:function(){
+					this.books.unshift(this.EleShift);
+				},
+				bookReverse:function(){
+					this.books.reverse();
+				}
+			}
+		});
+	</script>
+	</body>
+</html>

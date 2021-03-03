@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 组件通信</title>
+		<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<!-- <script src="https://cdn.bootcdn.net/ajax/libs/vue/1.0.8/vue.min.js"></script> -->
+	</head>
+	<body>
+		<div id="app">
+			
+			<my-component msg-father="我是子标签" fa-color="red">
+			</my-component>
+		</div>
+		<div id="app1">
+			<grandson-component></grandson-component>
+			{{msg}}
+		</div>
+		<div id="app2">
+			<grandson1-component></grandson1-component>
+			{{msg2}}
+		</div>
+		<script type="text/javascript">
+			//父=>子    通信  局部注册
+			var app=new Vue({
+				el:'#app',
+				components:{
+					'my-component':{
+						props:['msgFather','faColor'],
+						template:'<div>{{msgFather}}{{faColor}}</div>'
+					}
+				}
+			})
+			//父 => 孙组件   vue1.x写法导入vue1.x文件 ：<script src="https://cdn.bootcdn.net/ajax/libs/vue/1.0.8/vue.min.js"/>
+			var app1=new Vue({
+				el:'#app1',
+				data:{
+					msg:'hello'
+				},
+				components:{
+					'grandson-component':{
+						template:'<div><div><div><div><button type="button" @click="grandsonHandler">派遣事件</button></div></div></div></div>',
+						methods:{
+							grandsonHandler:function(){
+								this.$dispatch('on-message',"我是孙组件")
+							}
+						}
+					}
+				},
+				events:{
+					'on-message':function(message){
+						this.msg=message;
+					}
+				}
+			});
+			//父 => 孙组件   vue2.x写法 bus中介,vue1.x和vue2.x皆可使用
+			var bus=new Vue();
+			var app2=new Vue({
+				el:'#app2',
+				data:{
+					msg2:'msg2'
+				},
+				components:{
+					'grandson1-component':{
+						template:'<div><div><div><div><button type="button" @click="grandsonHandler1">上传事件</button></div></div></div></div>',
+						methods:{
+							grandsonHandler1:function(){
+								bus.$emit('myclick',"我是孙组件,是你的儿子");
+							}
+						}
+					}
+				},
+				mounted:function(){
+					var _this=this;
+					bus.$on('myclick',function(message){
+						_this.msg2=message;
+					})
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue 指令</title>
+	</head>
+	<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+		<div id="app-if">
+			<p v-if="isOK===false">{{date}}</p>
+			<p v-else-if="isDate==true">{{date}}</p>
+			<p v-else-if="isMsg==true">{{msg}}</p>
+			<p v-else>插入失败</p>
+		</div>
+		<div id="app-for">
+			<ul>
+				<li v-for="(book,index) in books ">
+					{{book}}
+					{{index}}
+				</li>
+			</ul>
+		</div>
+		<div id="app-bind">
+			<a v-bind:href="hrefurl">百度</a>
+			<img v-bind:src="imgUrl">
+		</div>
+		<div id="app-on">
+			<p v-if="isShow==true">当前是显示标签</p>
+			<p v-if="isShow==false">当前是隐藏标签</p>
+			<button type="button" v-on:click="chageShow">点击改变</button>
+		</div>
+	<script type="text/javascript">
+		var app=new Vue({
+			el:'#app-if',
+			data:{
+				isOK:true,
+				isDate:false,
+				isMsg:false,
+				msg:'你好,vue指令',
+				date:new Date()
+			}
+		})
+		var app=new Vue({
+			el:'#app-for',
+			data:{
+				books:['java并发编程实战','redis实战','mongoDB入门','thymeleaf使用手册']
+			}
+		})
+		var app=new Vue({
+			el:'#app-bind',
+			data:{
+				hrefurl:'http://www.baidu.com/',
+				imgUrl:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAA9dJREFUWIXFl09sVFUUh79738y8mY7WN1RQakDCVNpp1TQtiE2LQTYNxCYQF0QXbkQWshEiLly4wMTEYMLGGI11YYxxg5ooihsXplSkkLak1JamkLjQCq3tzOh05s303evidTotTOe94iC/1cvc3znnm3PufX8Ei0ofTuxXSh0VgnaQUe6ClMIW6IsaTsU+Gf8KQAAkDzW+K4R8424UXU1a6/es3vHjIn04sV9rvv4/ixclBAekUurovSgOoLQ6Jt2Z3ysCuT3gZ8MJ6yECHc/jjP6EqG8mGG9BhEIUro9h1D2Mff4M5s5u8lcvE9iSwD7zAdLwri8kEekHVERrCXe/hHnwLcTW7WRHBjESXWSGhwm0dRN97UPMvYfQdVsJPPEs2TkH5fjJDL4AAFR6jtzQOQCyg+dRuXnyV4cByHz7GdlzZwEw6jcTe/MjbNb5ghCpVxLa0xUMkzc3UbjxJ7LWwrnxO4Et2yhMjhJqeJz89TECGx5BOwsY6zcCUJi8glA2kZhRcRyeAIGmpzEeawcNhaxGK+9/VZR9ZYDC2IWKEAGvJPLRZsyeIwCY/msDoHrfwR65QHbOWRXCcw/o9F9rLFuSk3Rj1QKrbkzPDiwHsEcGUMnpin65bgNmyw63cKoUW4S4tRPeAH+XkmS+/5xs/w8V/ZFnnisBJGdWrJWD8ARQyzogrQcBCD+1h+CmeFl/qLF16bo4gkoQ/kagNQiBYdW5AG27iO570YPcQaWT5ZeWQXgCoBz0fAoRtZCLAPN93+FM/1HWHunaSzDegpOao9KZLUJ4A+B2QUQtjAdcgPzoJfKjl8p6Q83tBOMtt81/NQhfACo9g9wYJ9jYSuzYybKef778mMJvE8jYejfGBwD4BNDp2aXrzNkvCG5uwDry9gpP5ptPAZb2iZOaxY/8ASweRRmJkh8bxJmeQufmEeEadz2bwZm96XoWx1TlDrjJRDiCCNfgzEwx9cIOQs1toCE/Noh2FpD31SKCIaD8EbxjgOX3AuvVE+QGfsS+/DP2yAAA8n6LcGsnkZ17SjHV7UAJoGZ3DzW7e0A55CdHQQhC8WZufdJUFUAlb97+ozQIbXtyFWKNM1v5mVGUvxcSIC/rMJo6Cbd1YbZ2ImtjKyFTs+SG+rGH+sgN9fvugG8AgFxaUZjXICShhhbMtl2gFLmhPgrXfnVv2WuUmHs5kZPS/7vGEkSVJAX64loCwrWSYI2oSnEjSFJqOLXWwGpBBIK8v/hx2nRSCPH6WhP8l3FIk1/qT090SACrd/y4EBzQqD6tyPpNciedkAGSZkScqD890QHwL8sTnqjY5DriAAAAAElFTkSuQmCC'
+			}
+		})
+		var app=new Vue({
+			el:'#app-on',
+			data:{
+			isShow:true
+			},
+			methods:{
+				chageShow:function(){
+					this.isShow=!(this.isShow);
+				}
+			}
+		})
+	</script>
+	</body>
+</html>

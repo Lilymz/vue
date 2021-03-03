@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父链通信与子组件索引</title>
+		<script src="https://unpkg.com/vue/dist/vue.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{dataMsg}}
+			<component-a>
+			</component-a>
+		</div>
+		<div id="app1">
+			<input type="text" v-model="msg">
+			<component-b ref="componentB" :message="msg">
+			</component-b>
+		</div>
+		<script type="text/javascript">
+			//组件嵌套 全局方式
+			// Vue.component('hello-component',{
+			// 			template:'<div><div><button type="button" @click="connectFatherHandler">父链修改数据</button></div></div><div>hello</div>',
+			// 			methods:{
+			// 				connectFatherHandler:function(){
+			// 					console.log(this.$parent);
+			// 					console.log(this.$children);
+			// 					this.$parent.dataMsg='修改父链信息成功';
+			// 				}
+			// 			}
+			// 		})
+			//父链通信
+			var app=new Vue({
+				el:'#app',
+				data:{
+					dataMsg:''
+				},
+				components:{
+					'component-a':{
+						template:'<div><hello-component></hello-component><div><button type="button" @click="connectFatherHandler">父链修改数据</button></div></div><div>hello</div>',
+						methods:{
+							connectFatherHandler:function(){
+								console.log(this.$parent);
+								this.$parent.dataMsg='修改父链信息成功';
+							}
+						},
+						components:{
+							'hello-component':{
+								template:'<div><div><button type="button" @click="connectFatherHandler">父链修改数据</button></div></div><div>hello</div>',
+								methods:{
+									connectFatherHandler:function(){
+										console.log(this.$parent);
+										console.log(this.$children);
+										this.$parent.dataMsg='修改父链信息成功';
+									}
+								}
+							}
+						}
+					},
+				}
+			})
+			//子组件索引$refs
+			var app1=new Vue({
+				el:'#app1',
+				data:{
+					msg:null
+				},
+				components:{
+					'component-b':{
+						props:{
+							'message':[String,Number]
+						},
+						template:'<div>{{message.substring(2)}}</div><button type="button" @click="connectIndexHandler">父链修改数据</button>',
+						methods:{
+							connectIndexHandler:()=>{
+								this.msg=this.$refs.componentB.message;
+							}
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

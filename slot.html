@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Vue slot</title>
+		<script src="./vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<component-slot>
+				<p>component-slot我拥有内容</p>
+			</component-slot>
+		</div>
+		<div id="app1">
+			<name-slot>
+				<p slot="content">component-slot我拥有名字</p>
+			</name-slot>
+		</div>
+		<div id="app2">
+			<area-slot>
+				<p slot="header">标题</p>
+				<p>正文内容</p>
+				<p>更多的正文内容</p>
+				<div slot="footer">底部信息</div>
+			</area-slot>
+		</div>
+		<script type="text/javascript">
+			//单个slot
+			var app=new Vue({
+				el:'#app',
+				components:{
+					'component-slot':{
+						template:'\
+						<div>\
+						<slot>\
+						<p>component-slot没有内容我将默认显示</p>\
+						</slot>\
+						<component-slot2><p>我是内容的</p></component-slot2>\
+						</div>\
+						',
+						components:{
+							'component-slot2':{
+								template:'\
+								<div>\
+								<slot>\
+								<p>component-slot2没有内容我将默认显示</p>\
+								</slot>\
+								</div>\
+								',
+						     }
+					    }
+				    }
+				}
+			})
+			//具名slot  
+			var app1=new Vue({
+				el:'#app1',
+				components:{
+					'name-slot':{
+						template:'\
+						<div>\
+						<slot name="content"></slot>\
+						<slot>\
+						<p>name-slot没有内容我将默认显示</p>\
+						</slot>\
+						</div>\
+						'
+				    }
+				}
+			})
+			//作用域插槽
+			var app2=new Vue({
+				el:'#app2',
+				components:{
+					'area-slot':{
+						template:'\
+						<div class="container">\
+						 <div class="header">\
+						 <slot name="header"></slot>\
+						 </div>\
+						 <div class="main">\
+						 <slot></slot>\
+						 </div>\
+						 <div class="footer">\
+						 <slot name="footer"></slot>\
+						 </div>\
+						 </div>\
+						 '
+				    }
+				},
+				mounted:function(){
+					var header=this.$slots.header;
+					console.log(header);
+				}
+			})
+		</script>
+	</body>
+</html>
