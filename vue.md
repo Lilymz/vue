@@ -6,11 +6,11 @@
 
   - **MVVM框架：类似于后端MVC框架，vue采用了M-V-VM模式对前端项目管理,当视图层发生变化时，视图模型就会自动更新所发生的变化,反之亦然,View-ViewModel之间通过双向绑定，可看下图**
 
-    ![image-20210216135245739](.\img\MVVM1)
+    ![](/img/MVVM1)
 
     <center>图1-1 MMVM1</center>
 
-    ![image-20210216135714633](.\img\MVVM2.png)
+    ![](/img/MVVM2.png)
 
     <center>图1-2 MVVM2</center>
 
@@ -154,7 +154,7 @@
 
 - **组件通信  :组件的通信不只是父-子,归纳可为下图所示**
 
-  ![image-20210216224542883](.\img\communication.png)
+  ![image-20210216224542883](/img/communication.png)
 
   <center>图1-3 组件通信</center>
 
@@ -217,7 +217,7 @@
 
 ### 拓展：钩子函数
 
-![image-20210218224905865](.\img\hooks.png)
+![](/img/hooks.png)
 
 ## Vue之Webpack
 
@@ -384,19 +384,19 @@ history mode，页面路由含不含有#;选择Y
 
  选择CSS预编译器，这里我们选择Less
 
-![image-20210220221434433](.\img\css-pre-processor.png)
+![image-20210220221434433](/img/css-pre-processor.png)
 
 ESLint 代码校验规则
 
-![image-20210220221540959](.\img\EsLint.png)
+![image-20210220221540959](/img/EsLint.png)
 
 代码校验，Lint on save 保存就检查
 
-![image-20210220221620084](.\img\checkCode.png)
+![image-20210220221620084](/img/checkCode.png)
 
 配置保存到哪个文件中，选择存放到 package.json
 
-![image-20210220221713061](.\img\package.png)
+![image-20210220221713061](/img/package.png)
 
 ## 插件
 
